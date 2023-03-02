@@ -1,5 +1,10 @@
-a = [1, 2, 3, 4, 5, 5, 5]
-remove_set = {3, 5}
+import math
 
-result = [i for i in a if i not in remove_set]
-print(result)
+def lcm(a, b):
+    return a * b // math.gcd(a, b)
+
+a = 21
+b = 14
+
+print(math.gcd(a, b))
+print(lcm(a, b))
