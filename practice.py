@@ -1,10 +1,10 @@
-import math
+h = int(input())
+count = 0
 
-def lcm(a, b):
-    return a * b // math.gcd(a, b)
+for i in range(h+1):
+    for j in range(60):
+        for k in range(60):
+            if '3' in str(i) + str(j) + str(k):
+                count += 1
 
-a = 21
-b = 14
-
-print(math.gcd(a, b))
-print(lcm(a, b))
+print(count)
