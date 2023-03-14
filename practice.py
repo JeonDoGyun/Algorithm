@@ -240,40 +240,229 @@
 # print(result)
 
 # 개선된 다익스트라 알고리즘(heap)
-import heapq
-import sys
+# import heapq
+# import sys
 
-input = sys.stdin.readline
-INF = int(1e9)
+# input = sys.stdin.readline
+# INF = int(1e9)
 
-n, m = map(int, input().split())
-start = int(input())
-graph = [[] for i in range(n+1)]
-distance = [INF] * (n+1)
+# n, m = map(int, input().split())
+# start = int(input())
+# graph = [[] for i in range(n+1)]
+# distance = [INF] * (n+1)
 
-for _ in range(m):
-    a, b, c = map(int, input().split())
-    graph[a].append((b, c))
+# for _ in range(m):
+#     a, b, c = map(int, input().split())
+#     graph[a].append((b, c))
 
-def dijkstra(start):
-    q = []
-    heapq.heappush(q, (0, start)) # (거리, 시작지점)
-    distance[start] = 0
+# def dijkstra(start):
+#     q = []
+#     heapq.heappush(q, (0, start)) # (거리, 시작지점)
+#     distance[start] = 0
 
-    while q: # 큐가 비어있지 않다면 반복
-        dist, now = heapq.heappop(q)
-        if distance[now] < dist: # 현재 노드의 거리가 저장된 값보다 더 크면 = 현재의 노드가 이미 처리된 적이 있는 노드라면 무시
-            continue
-        for i in graph[now]:
-            cost = dist + i[1]
-            if cost < distance[i[0]]:
-                distance[i[0]] = cost
-                heapq.heappush(q, (cost, i[0]))
+#     while q: # 큐가 비어있지 않다면 반복
+#         dist, now = heapq.heappop(q)
+#         if distance[now] < dist: # 현재 노드의 거리가 저장된 값보다 더 크면 = 현재의 노드가 이미 처리된 적이 있는 노드라면 무시
+#             continue
+#         for i in graph[now]:
+#             cost = dist + i[1]
+#             if cost < distance[i[0]]:
+#                 distance[i[0]] = cost
+#                 heapq.heappush(q, (cost, i[0]))
 
-dijkstra(start)
+# dijkstra(start)
 
-for i in range(1, n+1):
-    if distance[i] == INF:
-        print("Infinity")
-    else:
-        print(distance[i])
+# for i in range(1, n+1):
+#     if distance[i] == INF:
+#         print("Infinity")
+#     else:
+#         print(distance[i])
+
+# # 플로이드 워셜 알고리즘
+# INF = int(1e9)
+
+# # 노드의 개수, 간선의 개수
+# n = int(input())
+# m = int(input())
+
+# # 2차원리스트로 만들고 모든 값을 무한으로 초기화
+# graph = [[INF] * (n+1) for _ in range(n+1)]
+
+# # 자기 자신으로 가는 거리는 모두 0
+# for a in range(1, n+1):
+#     for b in range(1, n+1):
+#         if a == b:
+#             graph[a][b] = 0
+
+# # 각 간선에 대한 정보를 입력 받아, 그 값으로 초기화
+# for _ in range(m):
+#     a, b, c = map(int, input().split()) # a에서 b로 가는 거리는 c
+#     graph[a][b] = c
+
+# # 점화식에 따라 플로이드 워셜 알고리즘 실행 / 3중 반복문
+# for k in range(1, n+1):
+#     for a in range(1, n+1):
+#         for b in range(1, n+1):
+#             graph[a][b] = min(graph[a][b], graph[a][k] + graph[k][b])
+
+# # 수행된 결과 출력
+# for a in range(1, n+1):
+#     for b in range(1, n+1):
+#         if graph[a][b] == INF:
+#             print("Infinity", end=" ")
+#         else:
+#             print(graph[a][b], end=" ")
+
+#     print()
+
+# # 총 걸리는 시간이면 등록된 거리에서 가장 큰 값을 입력하면 됨
+# n, m, c = map(int, input().split())
+# INF = int(1e9)
+# graph = [[INF] * (n+1) for _ in range(n+1)]
+# distance = []
+# count = 0
+
+# # x에서 y로 가는 간선의 길이 z
+# for _ in range(m):
+#     x, y, z = map(int, input().split())
+#     graph[x][y] = z
+
+# # 지정된 시작점에서 출발하여 못가는곳은 INF이기 때문에 패스하고 갈 수 있는 곳은 걸리는 거리를 따로 저장
+# def dijkstra(start):
+#     global count
+#     for i in range(1, n+1):
+#         if graph[start][i] == INF:
+#             continue
+#         else:
+#             distance.append(graph[start][i])
+#             count += 1
+
+# dijkstra(c)
+
+# print(count, max(distance))
+
+# import heapq
+# import sys
+# input = sys.stdin.readline
+# INF = int(1e9)
+
+# def dijkstra(start):
+#     q = []
+#     heapq.heappush(q, (0, start))
+#     distance[start] = 0
+#     while q:
+#         dist, now = heapq.heappop(q)
+#         if distance[now] < dist:
+#             continue
+#         for i in graph[now]:
+#             cost = dist + i[1]
+#             if cost < distance[i[0]]:
+#                 distance[i[0]] = cost
+#                 heapq.heappush(q, (cost, i[0]))
+
+# n, m, start = map(int, input().split())
+# graph = [[] for i in range(n+1)]
+# distance = [INF] * (n+1)
+
+# for _ in ragne(m):
+#     x, y, z = map(int, input().split())
+#     graph[x].append((y, z))
+
+# dijkstra(start)
+
+# count = 0
+# max_distance = 0
+# for d in distance:
+#     if d != 1e9:
+#         count += 1
+#         max_distance = max(max_distance, d)
+
+# print(count-1, max_distance) # 시작 노드는 제외해야 되기 때문에 -1
+
+# n, m = map(int, input().split())
+# graph = [[-1]*(n+1) for _ in range(n+1)]
+# distance = []
+# # 연결된 부분의 거리를 1로, 연결 안된 부분은 -1 그대로
+# for _ in range(m):
+#     a, b = map(int, input().split())
+#     graph[a][b] = 1
+
+# x, k = map(int, input().split()) # 최종 목적지, 경유지
+# # 1 -> k // D1k 와 D1i + Dik 중 최소인 것을 뽑으면 됨
+# for i in range(1, n+1):
+#     distanceToK = max(graph[1][k], graph[1][i] + graph[i][k])
+#     distanceToX = max(graph[k][x], graph[k][i] + graph[i][x])
+#     distance.append(distanceToK + distanceToX)
+
+# print(max(distance)+1)
+
+# INF = int(1e9)
+# n, m = map(int, input().split())
+# graph = [[INF] * (n+1) for _ in range(n+1)]
+
+# for a in range(1, n+1):
+#     for b in range(1, n+1):
+#         if a == b:
+#             graph[a][b] = 0
+
+# for _ in range(m):
+#     a, b = map(int, input().split())
+#     graph[a][b] = 1
+#     graph[b][a] = 1
+
+# x, k = map(int, input().split())
+
+# for k in range(1, n+1):
+#     for a in range(1, n+1):
+#         for b in range(1, n+1):
+#             graph[a][b] = min(graph[a][b], graph[a][k] + graph[k][b])
+
+# distance = graph[1][k] + graph[k][x] # 알고리즘을 사용해서 먼저 모든 distance값을 구해놓고 구하려는 거리에 접근
+
+# if distance >= INF:
+#     print("-1")
+# else:
+#     print(distance)
+
+# # 특정원소가 속한 집합을 찾기
+# def find_parent(parent, x):
+#     if parent[x] != x:
+#         return find_parent(parent, parent[x])
+#     return x
+
+# def fine_parent(parent, x):
+#     if parent[x] != x:
+#         parent[x] = fine_parent(parent, parent[x])
+#     return parent[x]
+
+# # 두 원소가 속한 집합 찾기
+# def union_parent(parent, a, b):
+#     a = find_parent(parent, a)
+#     b = find_parent(parent, b)
+#     if a < b:
+#         parent[b] = a
+#     else:
+#         parent[a] = b
+
+# v, e = map(int, input().split())
+# parent = [0] * (v+1)
+
+# for i in range(1, v+1):
+#     parent[i] = i # 부모 테이블 상에서, 부모를 자기 자신으로 초기화
+
+# for i in range(e):
+#     a, b = map(int, input().split())
+#     union_parent(parent, a, b)
+
+# # 각 원소가 속한 집합 출력
+# print("각 원소가 속한 집합: ", end='')
+# for i in range(1, v+1):
+#     print(find_parent(parent, i), end=' ')
+
+# print()
+
+# # 부모 테이블 네용 출력
+# print("부모 테이블: ", end='')
+# for i in range(1, v+1):
+#     print(parent[i], end=' ')
+
