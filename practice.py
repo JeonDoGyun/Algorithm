@@ -503,42 +503,114 @@
 #     print("Cycle 없음")
 
 # 크루스칼 알고리즘
-def find_parent(parent, x):
-    # 루트 노드를 찾을 때까지 호출
-    if parent[x] != x:
-        parent[x] = find_parent(parent, parent[x])
-    return parent[x]
+# def find_parent(parent, x):
+#     # 루트 노드를 찾을 때까지 호출
+#     if parent[x] != x:
+#         parent[x] = find_parent(parent, parent[x])
+#     return parent[x]
 
-def union_parent(parent, a, b):
-    a = find_parent(parent, a)
-    b = find_parent(parent, b)
-    if a < b:
-        parent[b] = a
-    else:
-        parent[a] = b
+# def union_parent(parent, a, b):
+#     a = find_parent(parent, a)
+#     b = find_parent(parent, b)
+#     if a < b:
+#         parent[b] = a
+#     else:
+#         parent[a] = b
 
-v, e = map(int, input().split())
-parent = [0] * (v+1)
+# v, e = map(int, input().split())
+# parent = [0] * (v+1)
 
-# 모든 간선을 담을 리스트와, 최종 비용을 담을 변수
-edges = []
-result = 0
+# # 모든 간선을 담을 리스트와, 최종 비용을 담을 변수
+# edges = []
+# result = 0
 
-for i in range(1, v+1):
-    parent[i] = i
+# for i in range(1, v+1):
+#     parent[i] = i
 
-for _ in range(e):
-    a, b, cost = map(int, input().split())
-    edges.append((cost, a, b))
+# for _ in range(e):
+#     a, b, cost = map(int, input().split())
+#     edges.append((cost, a, b))
 
-# 간선의 비용을 기준으로 오름차순 정렬
-edges.sort()
+# # 간선의 비용을 기준으로 오름차순 정렬
+# edges.sort()
 
-for edge in edges:
-    cost, a, b = edge
-	# 사이클이 발생하지 않는 경우에만 집합에 포함
-    if find_parent(parent, a) != find_parent(parent, b):
-        union_parent(parent, a, b)
-        result += cost
+# for edge in edges:
+#     cost, a, b = edge
+# 	# 사이클이 발생하지 않는 경우에만 집합에 포함
+#     if find_parent(parent, a) != find_parent(parent, b):
+#         union_parent(parent, a, b)
+#         result += cost
 
-print(cost)
+# print(cost)
+
+# 위상정렬 알고리즘
+# from collections import deque
+
+# v, e = map(int, input().split())
+# indegree = [0] * (v+1) # 진입차수 0으로 초기화
+# graph = [[] for i in range(v+1)] # 각 노드에 연결된 간선 정보를 담는 리스트 초기화
+
+# for _ in range(e):
+#     a, b = map(int, input().split())
+#     graph[a].append(b) # a에서 b로 이동 가능하다는 의미
+#     indegree[b] += 1 # 진입차수 증가
+
+# def topology_sort():
+#     result = []
+#     q = deque()
+#     # 진입차수가 0인 노드가 시작노드
+#     for i in range(1, v+1):
+#         if indegree[i] == 0:
+#             q.append(i)
+    
+#     while q:
+#         now = q.popleft()
+#         result.append(now)
+
+#         for i in graph[now]:
+#             indegree[i] -= 1 # 진입차수를 1 줄이고, 0인 경우에는 q 안에 넣어서 다음 차례로 만들어 줌
+#             if indegree[i] == 0:
+#                 q.append(i)
+
+#     for i in result:
+#         print(i, end=" ")
+
+# topology_sort()
+
+# 소수 알고리즘 기본
+# def is_prime_number(x):
+#     for i in range(2, x):
+#         if x % i == 0:
+#             return False
+#     return True
+# print(is_prime_number(4))
+# print(is_prime_number(7))
+
+# 개선 (제곱근 이용)
+# import math
+# def is_prime_number(x):
+# 		# 2부터 x의 제곱근까지의 모든 수를 확인
+#     for i in range(2, int(math.sqrt(x))+1):
+#         if x % i == 0:
+#             return False
+#     return True
+
+# print(is_prime_number(4))
+# print(is_prime_number(7))
+
+# 에라토스테네스의 체
+# import math
+
+# n = 1000
+# array = [True for i in range(n+1)]
+
+# for i in range(2, int(math.sqrt(n))+1):
+#     if array[i] == True:
+#         j = 2 # i를 제외한 i의 배수 지우기
+#         while i * j <= n:
+#             array[i * j] = False
+#             j += 1
+
+# for i in range(2, n+1):
+#     if array[i]:
+#         print(i, end=" ")
