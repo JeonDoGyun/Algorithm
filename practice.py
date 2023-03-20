@@ -614,3 +614,37 @@
 # for i in range(2, n+1):
 #     if array[i]:
 #         print(i, end=" ")
+
+# 투 포인터 알고리즘
+# n = 5 # 데이터의 개수
+# m = 5 # 부분 합
+# data = [1, 2, 3, 2, 5]
+
+# count = 0
+# interval_sum = 0
+# end = 0
+
+# for start in range(n):
+#     # end를 가능한 만큼 이동시키면서 확인
+#     while interval_sum < m and end < n:
+#         interval_sum += data[end]
+#         end += 1
+#     if interval_sum == m:
+#         count += 1
+#     interval_sum -= data[start]
+
+# print(count)
+
+# 구간 합 빠르게 구하기
+# n = 5
+# data = [10, 20, 30, 40, 50]
+
+# sum_value = 0
+# prefix_sum = [0]
+# for i in data:
+#     sum_value += i
+#     prefix_sum.append(sum_value)
+
+# left = 3
+# right = 4
+# print(prefix_sum[right] - prefix_sum[left - 1])
